@@ -1,10 +1,12 @@
+const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
 
-const User = require("../models/user");
+
+const User = mongoose.model('User');
 const authConfig = require("../../config/user");
-const mailer = require("../../modules/mailer")
+const mailer = require("../../modules/mailer");
 
 const generateToken = (params = {}) => {
     return jwt.sign(params, authConfig.secret, {
@@ -68,7 +70,7 @@ const forgotPassword = async (req, res) => {
         const now = new Date();
         now.setHours(now.getHours() + 1);
 
-        await User.findByIdAndUpdate(user._id, {
+        await User.findByIdAndUpdate({_id : user._id}, {
             '$set': {
                 passordResetToken: token,
                 passordResetExpires: now
