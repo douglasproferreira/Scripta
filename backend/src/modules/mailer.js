@@ -17,7 +17,7 @@ const transport = nodemailer.createTransport({
   }
 });
 
-const viewPath = path.resolve("./src/resources/mail/");
+const viewPath = path.resolve("/src/resources/mail/");
 
 transport.use(
   "compile", 

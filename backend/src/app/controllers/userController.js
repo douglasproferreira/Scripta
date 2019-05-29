@@ -70,7 +70,7 @@ const forgotPassword = async (req, res) => {
         const now = new Date();
         now.setHours(now.getHours() + 1);
 
-        await User.findByIdAndUpdate({_id : user._id}, {
+        await User.findByIdAndUpdate({ _id: user._id }, {
             '$set': {
                 passordResetToken: token,
                 passordResetExpires: now
@@ -85,7 +85,7 @@ const forgotPassword = async (req, res) => {
         }, (err) => {
             if (err)
                 console.log(err)
-                return res.status(400).send({ error: "Cannot send forgot password email" });
+            return res.status(400).send({ error: "Cannot send forgot password email" });
 
             return res.send();
         })
@@ -96,8 +96,38 @@ const forgotPassword = async (req, res) => {
     }
 }
 
+const resetPassword = async (req, res) => {
+    const { email, token, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email })
+            .select('+passwordResetToken passwordResetExpires');
+
+        if (!user)
+            return res.status(400).send({ error: 'User not found' });
+
+        if (token !== user.passwordResetToken)
+            return res.status(400).send({ error: 'Token invalid' });
+
+        const now = new Date();
+        if (now > user.passwordResetExpires)
+            return res.status(400).send({ error: 'Token expired, generate a new one' });
+
+        user.password = password;
+
+        await user.save();
+
+        res.send();
+
+    } catch (err) {
+        return res.status(400).send({ error: 'Cannot reset, try again' });
+    }
+}
+
+
 module.exports = {
     register,
     authenticate,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 };

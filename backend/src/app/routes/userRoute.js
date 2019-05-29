@@ -6,6 +6,9 @@ const UserController = require("../controllers/userController");
 
 UserRoute.post('/register', UserController.register);
 UserRoute.post('/authenticate', UserController.authenticate);
+
+// Rotas sem funcionamento ainda
 UserRoute.post('/forgotPassword', UserController.forgotPassword);
+UserRoute.post('/resetPassword', UserController.resetPassword);
 
 module.exports = UserRoute;
