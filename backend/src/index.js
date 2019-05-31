@@ -3,16 +3,15 @@ const express = require("express");
 
 const requireDir = require("require-dir");
 
-
 const app = express();
 
 app.use(express.json());
-// app.use(bodyParser.json()); 
-// app.use(bodyParser.urlencoded({ extended: false })); 
 
 requireDir('./app/models')
 
-app.use("/user", require("./app/routes/userRoute"));
-// app.use("/aluno", require("./app/routes/alunoRoute"));
+app.use("/user", require("./app/routes/UserRoute"));
+// app.use("/class", require("./app/routes/ClassRoute"));
+
+
 
 app.listen(3000);
