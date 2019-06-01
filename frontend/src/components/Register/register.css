@@ -1,0 +1,117 @@
+.FormRegister {
+    width: 40%;
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.border-style {
+    border: none;
+    outline: none;
+    border-bottom: solid 1px rgb(48, 47, 47);
+    outline-color: rgb(0, 0, 0);
+    padding-top: 40px;
+    width: 75%;
+}
+
+.border-style:focus {
+    border: none;
+    border-bottom: 2px solid #40E0D0;
+}
+
+.transition {
+    width: 50%;
+    height: 52px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 7px;
+    font-size: 16px;
+    margin-top: 40px;
+    margin-left: 25%;
+}
+
+.buttonL, .buttonC {
+    width: 50%;
+    height: 50px;
+    outline: none;
+    border: solid 1px #40E0D0;
+    font-size: 15px;
+}
+
+.buttonC {
+    background: #40e0d0;
+    color: #fafafa;
+    font-weight: bold;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.buttonL {
+    background: #fafafa;
+    color: #000000;
+    font-weight: bold;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+.link {
+    font-style: none;
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.form {
+    margin-top: 30px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonR {
+    margin-top: 60px;
+    background: #40E0D0;
+    color: #fafafa;
+    font-weight: bold;
+    border-radius: 7px;
+    width: 30%;
+    height: 45px;
+    outline: none;
+    border: solid 1px #40E0D0;
+    font-size: 15px;
+}
+
+.footerC{
+    padding: 5px;
+    width: 40%;
+    position: fixed;
+    margin: auto;
+    bottom: 0;
+    text-align: center;
+    font-size: 15px;
+    color: #000000;
+}
+
+.select {
+    padding: 0;
+    margin: 0;
+    width: 75%;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px rgb(48, 47, 47);
+    outline-color: rgb(0, 0, 0);
+    margin-top: 40px;
+    font-size: 15px;
+    padding-bottom: 7px;
+}
+
+.select:focus {
+    border-bottom: 2px solid #40E0D0;
+}

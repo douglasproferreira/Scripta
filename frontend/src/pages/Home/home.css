@@ -1,0 +1,41 @@
+.home {
+    background-size: cover;
+    background-image: url(/images/background-1.jpg);
+    height: 100vh;
+}
+
+.filter {
+    width: 100%;
+    height: calc(100vh - 55px);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.buttonH {
+    margin-top: 40px;
+    background: #40E0D0;
+    color: #fafafa;
+    font-weight: bold;
+    border-radius: 7px;
+    width: 11%;
+    height: 42px;
+    outline: none;
+    border: solid 1px #40E0D0;
+    font-size: 17px;
+    font-family: 'Segoe UI';
+}
+
+.mensagem {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.text {
+    font-size: 24px;
+}
+
+.c {
+    margin-bottom: 15px;
+}
