@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import '../index.css'
 
-import Cadastro from '../../components/Register/index'
+import Cadastro from '../../components/Register/'
 
 export default class Register extends Component {
 

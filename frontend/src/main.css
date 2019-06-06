@@ -7,6 +7,9 @@
 
 body {
     font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-    background: #fafafa;
-    color: #333;
+    background-size: cover;
+    background-image: url(/images/background-1.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #0000;
 }

@@ -1,0 +1,88 @@
+.home {
+    z-index: 1030;
+    height: 100vh;
+    width: 100%;
+}
+.container{
+    width: 100%;
+    display: block;
+}
+.turmas {
+    padding-top: 90px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 40px;
+    margin: auto;
+    position: relative;
+}
+
+.textTurma{
+    z-index: 999;
+    color: #000;
+}
+
+.imgTurma {
+    z-index: 999;
+    width: 400px;
+    height: 50px;
+    position: absolute;
+}
+
+.mensagem {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.text {
+    font-size: 24px;
+}
+
+.c {
+    margin-bottom: 15px;
+}
+
+.plus-button {
+    color: white;
+    border: none;
+	background-color: #000;
+	font-size: 16px;
+	height: 3.4em;
+	width: 3.4em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    margin-top: 400px;
+    left: calc(100% - 100px);
+}
+
+.plus {
+    font-size: 40px;
+}
+
+Header {
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    z-index: 1030
+}
+
+.space {
+    width: 100%;
+    height: 25px;
+}
+
+Footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+}
+
