@@ -124,10 +124,20 @@ const resetPassword = async (req, res) => {
     }
 }
 
+const show = async () => {
+    try {
+        const user = User.findById(req.params.id);
+        res.send({ user });
+    } catch (err) {
+        res.status(400).send({ error: 'Error in loading user' });
+    }
+}
+
 
 module.exports = {
     register,
     authenticate,
     forgotPassword,
-    resetPassword
+    resetPassword, 
+    show
 };

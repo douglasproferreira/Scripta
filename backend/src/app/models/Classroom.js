@@ -1,6 +1,6 @@
 const mongoose = require('../../database');
 
-const ClassSchema = new mongoose.Schema({
+const ClassroomSchema = new mongoose.Schema({
     nameClass: {
         type: String,
         required: true,
@@ -28,7 +28,7 @@ const ClassSchema = new mongoose.Schema({
     }
 });
 
-const Class = mongoose.model("Class", ClassSchema);
+const Classroom = mongoose.model("Classroom", ClassroomSchema);
 
-module.exports = Class;
+module.exports = Classroom;
 

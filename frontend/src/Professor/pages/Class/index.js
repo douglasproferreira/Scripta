@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-
-import api from '../../../services/api'
 import Header from '../../components/Header/'
 import Footer from '../../components/Footer/'
 import Modal from '../../components/Modal/'
@@ -12,7 +10,6 @@ import './class.css'
 export default class Classroom extends Component {
     state = {
         classrooms: [],
-        mapear: false
     }
 
     componentDidMount() {
@@ -20,13 +17,21 @@ export default class Classroom extends Component {
     }
 
     load = async () => {
-        const response = await api.get('/classroom/list');
+        const token = await localStorage.getItem('token')
+        fetch('http://localhost:3000/classroom/listUser', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.setTurmas(data)})
+            .catch(err => { console.log(err) })
+    }
 
-        this.setState({ classrooms: response.data });
-
+    setTurmas = (data) => {
+        this.setState({classrooms: data.classroom})
         console.log(this.state.classrooms)
-
-        return this.state.classrooms
     }
 
     constructor(props) {

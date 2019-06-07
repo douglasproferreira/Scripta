@@ -23,12 +23,14 @@ export default class Login extends Component {
             return alert('Há campos obrigatórios em branco!');
 
         try {
-
             const response = await api.post('/user/authenticate', {
                 email: this.state.email,
                 password: this.state.pass
             })
             alert('Autenticado com sucesso!')
+            console.log(response)
+            await localStorage.setItem('token', response.data.token)
+
             this.nextPage();
 
         } catch (err) {
@@ -37,12 +39,23 @@ export default class Login extends Component {
         }
     }
 
+
+
     nextPage = async () => {
+        const token = await localStorage.getItem('token')
+        fetch('http://localhost:3000/classroom/listUser', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.verificar(data) })
+            .catch(err => { console.log(err) })
+    }
 
-        const res = await api.get('/classroom/list');
-
-        console.log(res.data)
-        if (res.data === []) {
+    verificar = (data) => {
+        if (data === []) {
             return this.setState({ path: '/home', from: true });
         } else
             return this.setState({ path: '/class', from: true });

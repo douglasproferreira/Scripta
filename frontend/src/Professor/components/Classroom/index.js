@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './classroom.css'
 
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 export default class Classroom extends Component {
@@ -21,7 +21,7 @@ export default class Classroom extends Component {
                     <p className='description-class'>
                         {classroom.description}
                     </p>
-                    <button className='button-class'>Acessar</button>
+                    <button className='button-class'><Link to={'/dashboard'} className='link-class'>Acessar</Link></button>
                 </div>
         );
     }

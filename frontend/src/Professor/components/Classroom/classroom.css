@@ -39,3 +39,9 @@
     color: white;
     font-weight: bold;
 }
+
+.link-class{
+    font-style: none;
+    text-decoration: none;
+    color: white;
+}

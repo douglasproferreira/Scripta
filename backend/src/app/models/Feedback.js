@@ -18,7 +18,7 @@ const FeedbackSchema = new mongoose.Schema({
     },
 
     task: {
-        type: mongoose.Schemaa.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 
