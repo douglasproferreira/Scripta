@@ -13,15 +13,15 @@ export default class Classroom extends Component {
         return (
                 <div className="classroom-card">
                     <strong className='name-turma'>
-                        {classroom.nameClass}
+                    <Link to={{pathname: '/dashboard',
+                    state:this.props}} className='link-class'>{classroom.nameClass}</Link>
                     </strong>
                     <h5 className='name-teacher'>
-                       Prof. {classroom.user.username} 
+                       Prof. {classroom.teacher.nome} 
                     </h5>
                     <p className='description-class'>
                         {classroom.description}
                     </p>
-                    <button className='button-class'><Link to={'/dashboard'} className='link-class'>Acessar</Link></button>
                 </div>
         );
     }

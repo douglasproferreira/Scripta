@@ -11,8 +11,8 @@ UserRoute.post('/authenticate', UserController.authenticate);
 UserRoute.use(middeware)
 UserRoute.get('/show', UserController.show);
 
-// Rotas sem funcionamento ainda
-UserRoute.post('/forgotPassword', UserController.forgotPassword);
-UserRoute.post('/resetPassword', UserController.resetPassword);
+// // Rotas sem funcionamento ainda
+// UserRoute.post('/forgotPassword', UserController.forgotPassword);
+// UserRoute.post('/resetPassword', UserController.resetPassword);
 
 module.exports = UserRoute;

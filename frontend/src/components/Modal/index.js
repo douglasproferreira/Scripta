@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import './modal.css'
@@ -20,6 +20,6 @@ export default class Modal extends Component {
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children,this.el);
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }

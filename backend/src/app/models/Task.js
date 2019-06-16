@@ -12,24 +12,25 @@ const TaskSchema = new mongoose.Schema({
         required: true
     },
 
-    assignedTo: {
+    valueTask: {
+        type: String,
+    },
+
+    classroom: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Classroom',
         required: true
     },
 
-    class: {
+    answer: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Class',
-        required: true
-    },
-
+        ref: 'TaskAnswer'
+    }],
+    
     createdAt: {
         type: Date,
         default: Date.now
     }
-
-    // Partes do relatório
 })
 
 const Task = mongoose.model('Task', TaskSchema);

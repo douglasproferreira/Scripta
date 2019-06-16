@@ -1,24 +1,18 @@
 const mongoose = require('../../database');
 
 const FeedbackSchema = new mongoose.Schema({
-
     nota: {
         type: String,
-        required: true,
     },
 
-    avaliacao: {
+    parecer: {
         type: String,
         required: true
     },
 
-    user: {
+    taskAnswer: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-
-    task: {
-        type: mongoose.Schema.Types.ObjectId,
+        ref: 'TaskAnswer',
         required: true
     },
 

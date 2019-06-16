@@ -28,10 +28,16 @@ export default class Login extends Component {
                 password: this.state.pass
             })
             alert('Autenticado com sucesso!')
-            console.log(response)
-            await localStorage.setItem('token', response.data.token)
+            
+            await localStorage.setItem('token', response.data.token);
 
-            this.nextPage();
+            console.log(response.data.user.typeUser)
+
+            if(response.data.user.typeUser === 'professor'){
+                this.nextPage();
+            } else {
+                this.nextPageAluno();
+            }
 
         } catch (err) {
             console.log(err)
@@ -39,6 +45,18 @@ export default class Login extends Component {
         }
     }
 
+    nextPageAluno = async () => {
+        const token = await localStorage.getItem('token')
+        fetch('http://localhost:3000/user/show', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.verificarAluno(data) })
+            .catch(err => { console.log(err) })
+    }
 
 
     nextPage = async () => {
@@ -61,11 +79,19 @@ export default class Login extends Component {
             return this.setState({ path: '/class', from: true });
     }
 
+    verificarAluno = (data) => {
+        console.log(data.user);
+        console.log(data.user.classroom.length)
+        if (!data.user.classroom.length) {
+            return this.setState({ path: '/homeAluno', from: true });
+        } else
+            return this.setState({ path: '/classAluno', from: true });
+    }
+
     render() {
         if (this.state.from) {
             return <Redirect to={this.state.path} />
         }
-
         return (
             <div className='FormLogin'>
                 <div><img className="logo" src="/images/logo.png" alt="logo da plataforma" /></div>

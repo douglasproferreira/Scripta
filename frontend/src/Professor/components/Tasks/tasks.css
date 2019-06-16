@@ -1,0 +1,44 @@
+.card-task {
+    width: 50%;
+    height: 130px;
+    border-radius: 10px;
+    background: white;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.task-title {
+    font-size: 17px;
+    color: black;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.task-description {
+    font-weight: normal;
+}
+
+.task-options {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.option-edit, 
+.option-view{
+    background: white;
+    border: none;
+    position: relative;
+    border-radius: 50%;
+    justify-content: flex-end;
+}
+
+.option-view .img-view{
+    width: 25px;
+    height: 25px;
+}

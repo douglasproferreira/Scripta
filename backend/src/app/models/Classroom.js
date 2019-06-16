@@ -1,6 +1,11 @@
 const mongoose = require('../../database');
 
 const ClassroomSchema = new mongoose.Schema({
+    codigo: {
+        type: String,
+        unique: true
+    },
+    
     nameClass: {
         type: String,
         required: true,
@@ -8,14 +13,19 @@ const ClassroomSchema = new mongoose.Schema({
 
     description: {
         type: String,
-        required: true
+        required: true,
     },
 
-    user: {
+    teacher: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
+
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
 
     tasks: [{
         type: mongoose.Schema.Types.ObjectId,

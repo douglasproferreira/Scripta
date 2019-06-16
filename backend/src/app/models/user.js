@@ -8,11 +8,10 @@ const UserSchema = new mongoose.Schema({
     lowercase: true
   },
 
-  username: {
+  nome: {
     type: String,
     unique: true,
     required: true,
-    lowercase: true
   },
 
   email: {
@@ -21,6 +20,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     lowercase: true
   },
+
   password: {
     type: String,
     required: true,
@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema({
 
   classroom: [{
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'Classroom'
   }],
 
   createdAt: {

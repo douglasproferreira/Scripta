@@ -1,7 +1,7 @@
 .classroom-card {
     color: #000;
-    width: 42%;
-    height: 150px;
+    width: 45%;
+    height: 140px;
     background-color: white;
     border-radius: 10px;
     margin: auto;
@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     font-family: 'Segoe UI';
     position: relative;
     padding: 20px;
@@ -17,15 +17,18 @@
 }
 
 .name-turma {
-    font-size: 18px;
+    font-size: 17px;
+    padding-bottom: 5px;
 }
 
 .name-teacher {
-    font-size: 16px;
+    font-size: 15px;
+    padding-bottom: 5px;
 }
 
 .description-class {
     font-size: 14px;
+    padding-bottom: 5px;
 }
 
 .button-class {

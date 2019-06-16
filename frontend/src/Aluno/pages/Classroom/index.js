@@ -4,12 +4,13 @@ import Footer from '../../../components/Footer/'
 import Modal from '../../../components/Modal/'
 import Classrooms from '../../components/Classroom/'
 
-import './class.css'
+import './classroom.css'
 
 
 export default class Classroom extends Component {
     state = {
         classrooms: [],
+        codigo: ''
     }
 
     componentDidMount() {
@@ -18,19 +19,44 @@ export default class Classroom extends Component {
 
     load = async () => {
         const token = await localStorage.getItem('token')
-        fetch('http://localhost:3000/classroom/listUser', {
+        fetch('http://localhost:3000/classroom/listUserAluno', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
             .then(res => res.json())
-            .then(data => { this.setTurmas(data)})
+            .then(data => { this.setTurmas(data) })
             .catch(err => { console.log(err) })
     }
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(this.state.codigo)
+        const token = await localStorage.getItem('token');
+        fetch('http://localhost:3000/classroom/inClass', {
+            method: 'POST',
+            body: JSON.stringify({
+                codigo: this.state.codigo
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { console.log(data) })
+            .catch(err => { console.log(err) })
+        this.escondeModal();
+    }
+
+    handleInputChange = (e) => {
+        this.setState({codigo: e.target.value})
+    }
+
     setTurmas = (data) => {
-        this.setState({classrooms: data.classroom})
+        console.log(data.classroom)
+        this.setState({ classrooms: data.classroom })
         console.log(this.state.classrooms)
     }
 
@@ -54,12 +80,15 @@ export default class Classroom extends Component {
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
-                        <div className='modalText'>Criar Turma</div>
-                        <form className='formM'>
-                            <input type='text' name='fwd' placeholder='Assunto' className="border-style" />
-                            <input type='text' name='name' placeholder='Nome da Turma' className="border-style padding" />
+                        <div className='modalText'>Participar da Turma</div>
+                        <form className='formM' action='submit'>
+                            <input type='text'
+                                placeholder='Codigo da Turma'
+                                className="border-style"
+                                value={this.state.codigo}
+                                onChange={this.handleInputChange} />
                             <div className='buttonM'>
-                                <button onClick={this.escondeModal} className='modalButton'>Criar</button>
+                                <button onClick={this.handleSubmit} className='modalButton'>Entrar</button>
                             </div>
                         </form>
                     </div>
@@ -81,6 +110,7 @@ export default class Classroom extends Component {
                 </div>
                 <Footer />
             </div>
+
         )
     }
 }

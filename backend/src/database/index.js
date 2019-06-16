@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://admin-scripta:Scripta2019@ds147451.mlab.com:47451/scripta", {
+mongoose.connect("mongodb://admin:scripta2019@ds235197.mlab.com:35197/scripta", {
   useCreateIndex: true,
   useNewUrlParser: true
 });

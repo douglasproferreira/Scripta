@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 
 const User = mongoose.model('User');
 const authConfig = require("../../config/user");
-const mailer = require("../../modules/mailer");
+// const mailer = require("../../modules/mailer");
 
 const generateToken = (params = {}) => {
     return jwt.sign(params, authConfig.secret, {
@@ -16,11 +16,9 @@ const generateToken = (params = {}) => {
 
 const register = async (req, res) => {
     const { email } = req.body;
-    const { username } = req.body;
+    const { name } = req.body;
 
     try {
-        if (await User.findOne({ username }))
-            return res.status(400).send({ error: "Username already exists" });
 
         if (await User.findOne({ email }))
             return res.status(400).send({ error: "User already exists" });
@@ -34,6 +32,7 @@ const register = async (req, res) => {
             token: generateToken({ id: user.id })
         });
     } catch (err) {
+        console.log(err)
         return res.status(400).send({ error: "Registration failed" });
     }
 };
@@ -56,79 +55,89 @@ const authenticate = async (req, res) => {
     });
 };
 
-const forgotPassword = async (req, res) => {
-    const { email } = req.body;
+// const forgotPassword = async (req, res) => {
+//     const { email } = req.body;
 
+//     try {
+//         const user = await User.findOne({ email });
+
+//         if (!user)
+//             return res.status(400).send({ error: "User not found" });
+
+//         const token = crypto.randomBytes(20).toString('hex');
+
+//         const now = new Date();
+//         now.setHours(now.getHours() + 1);
+
+//         await User.findByIdAndUpdate({ _id: user._id }, {
+//             '$set': {
+//                 passordResetToken: token,
+//                 passordResetExpires: now
+//             }
+//         })
+
+//         mailer.sendMail({
+//             to: email,
+//             from: 'douglas.ferreira@novaandradina.org',
+//             template: 'auth/forgot_password',
+//             context: { token },
+//         }, (err) => {
+//             if (err)
+//                 console.log(err)
+//             return res.status(400).send({ error: "Cannot send forgot password email" });
+
+//             return res.send();
+//         })
+
+//     } catch (err) {
+//         console.log(err)
+//         res.status(400).send({ error: 'Error on forgot password - try again' });
+//     }
+// }
+
+// const resetPassword = async (req, res) => {
+//     const { email, token, password } = req.body;
+
+//     try {
+//         const user = await User.findOne({ email })
+//             .select('+passwordResetToken passwordResetExpires');
+
+//         if (!user)
+//             return res.status(400).send({ error: 'User not found' });
+
+//         if (token !== user.passwordResetToken)
+//             return res.status(400).send({ error: 'Token invalid' });
+
+//         const now = new Date();
+//         if (now > user.passwordResetExpires)
+//             return res.status(400).send({ error: 'Token expired, generate a new one' });
+
+//         user.password = password;
+
+//         await user.save();
+
+//         res.send();
+
+//     } catch (err) {
+//         return res.status(400).send({ error: 'Cannot reset, try again' });
+//     }
+// }
+
+const show = async (req, res) => {
+    console.log(req.userId)
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findById({ _id: req.userId }).populate(['classroom']);
 
-        if (!user)
-            return res.status(400).send({ error: "User not found" });
+        const classroom = user.classroom; 
 
-        const token = crypto.randomBytes(20).toString('hex');
+        console.log(classroom[0]._id)
 
-        const now = new Date();
-        now.setHours(now.getHours() + 1);
+        // const teacher = await User.findById({_id : user.classroom.teacher})
 
-        await User.findByIdAndUpdate({ _id: user._id }, {
-            '$set': {
-                passordResetToken: token,
-                passordResetExpires: now
-            }
-        })
-
-        mailer.sendMail({
-            to: email,
-            from: 'douglas.ferreira@novaandradina.org',
-            template: 'auth/forgot_password',
-            context: { token },
-        }, (err) => {
-            if (err)
-                console.log(err)
-            return res.status(400).send({ error: "Cannot send forgot password email" });
-
-            return res.send();
-        })
+        res.send({ user });
 
     } catch (err) {
         console.log(err)
-        res.status(400).send({ error: 'Error on forgot password - try again' });
-    }
-}
-
-const resetPassword = async (req, res) => {
-    const { email, token, password } = req.body;
-
-    try {
-        const user = await User.findOne({ email })
-            .select('+passwordResetToken passwordResetExpires');
-
-        if (!user)
-            return res.status(400).send({ error: 'User not found' });
-
-        if (token !== user.passwordResetToken)
-            return res.status(400).send({ error: 'Token invalid' });
-
-        const now = new Date();
-        if (now > user.passwordResetExpires)
-            return res.status(400).send({ error: 'Token expired, generate a new one' });
-
-        user.password = password;
-
-        await user.save();
-
-        res.send();
-
-    } catch (err) {
-        return res.status(400).send({ error: 'Cannot reset, try again' });
-    }
-}
-
-const show = async () => {
-    try {
-        const user = User.findById(req.params.id);
-        res.send({ user });
-    } catch (err) {
         res.status(400).send({ error: 'Error in loading user' });
     }
 }
@@ -137,7 +146,7 @@ const show = async () => {
 module.exports = {
     register,
     authenticate,
-    forgotPassword,
-    resetPassword, 
+    // forgotPassword,
+    // resetPassword, 
     show
 };

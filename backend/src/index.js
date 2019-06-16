@@ -13,6 +13,9 @@ requireDir('./app/models')
 
 app.use("/user", require("./app/routes/UserRoute"));
 app.use("/classroom", require("./app/routes/ClassroomRoutes"));
+app.use("/task", require("./app/routes/TaskRoutes"));
+app.use("/taskAnswer", require("./app/routes/TaskAnswerRoutes"));
+
 
 app.listen(3000, () => {
     console.log(':) Server started on port 3000')

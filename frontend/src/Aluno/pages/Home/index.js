@@ -28,12 +28,11 @@ export default class Home extends Component {
       <Modal>
         <div className="modal">
           <div className='modalBody'>
-            <div className='modalText'>Criar Turma</div>
+            <div className='modalText'>Participar da Turma</div>
             <form className='formM'>
-              <input type='text' name='fwd' placeholder='Assunto' className="border-style" />
-              <input type='text' name='name' placeholder='Nome da Turma' className="border-style padding" />
+              <input type='text' name='codigo' placeholder='Código da Turma' className="border-style" />
               <div className='buttonM'>
-                <button onClick={this.escondeModal} className='modalButton'>Criar</button>
+                <button onClick={this.escondeModal} className='modalButton'>Entrar</button>
               </div>
             </form>
           </div>
@@ -45,9 +44,9 @@ export default class Home extends Component {
         <Header />
         <div className='mensagem'>
           <p className='text c'>Bem  Vindo!</p>
-          <p className='text'>Crie  sua  primeira  turma...</p>
+          <p className='text'>Participe  de  sua  primeira  turma...</p>
           <div className='buttonH'>
-            <button onClick={this.mostraModal} className='botaoH'>Criar</button>
+            <button onClick={this.mostraModal} className='botaoH'>Participar</button>
             {modal}
           </div>
         </div>
