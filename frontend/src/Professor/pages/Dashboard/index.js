@@ -7,19 +7,36 @@ import Task from '../../components/Tasks';
 
 export default class Dashboard extends Component {
 
+    state = {
+        title: '',
+        descriptionC: '',
+        descriptionE: '',
+        nameClass: ''
+    }
+
     constructor(props) {
         super(props);
-        this.state = { showModal: false, classrooms: [] };
-        this.mostraModal = this.mostraModal.bind(this);
-        this.escondeModal = this.escondeModal.bind(this);
+        this.state = { showModalC: false, showModalE: false, classrooms: [] };
+        this.mostraModalC = this.mostraModalC.bind(this);
+        this.escondeModalC = this.escondeModalC.bind(this);
+        this.mostraModalE = this.mostraModalE.bind(this);
+        this.escondeModalE = this.escondeModalE.bind(this);
     }
 
-    mostraModal() {
-        this.setState({ showModal: true });
+    mostraModalC() {
+        this.setState({ showModalC: true });
     }
 
-    escondeModal() {
-        this.setState({ showModal: false });
+    escondeModalC() {
+        this.setState({ showModalC: false });
+    }
+
+    mostraModalE() {
+        this.setState({ showModalE: true });
+    }
+
+    escondeModalE() {
+        this.setState({ showModalE: false });
     }
 
     verificar = (tasks) => {
@@ -37,11 +54,65 @@ export default class Dashboard extends Component {
         }
     }
 
+    editarTurma = async (e) => {
+        console.log(this.state)
+        e.preventDefault();
+        const token = await localStorage.getItem('token');
+        fetch('http://localhost:3000/classroom/update', {
+            method: 'PUT',
+            body: JSON.stringify({
+                classId: this.props.location.state.classroom._id,
+                nameClass: this.state.nameClass,
+                description: this.state.descriptionE
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.nextE(data) })
+            .catch(err => { console.log(err) })
+    }
+
+    nextE = (data) => {
+        console.log(data)
+        alert('Alterado com sucesso!')
+        this.escondeModalE();
+    }
+
+    criarTarefa = async (e) => {
+        e.preventDefault();
+        const token = await localStorage.getItem('token');
+        fetch('http://localhost:3000/task/createTask', {
+            method: 'POST',
+            body: JSON.stringify({
+                title: this.state.title,
+                description: this.state.descriptionC,
+                classroom: this.props.location.state.classroom
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.nextC(data) })
+            .catch(err => { console.log(err) })
+    }
+
+    nextC = (data) => {
+        console.log(data)
+        alert('Tarefa criada com sucesso')
+        this.escondeModalC()
+    }
+
+
     render() {
         const classroom = this.props.location.state.classroom
         const tasks = classroom.tasks
         this.verificar(tasks)
-        const modal = this.state.showModal ? (
+        const modalE = this.state.showModalE ? (
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
@@ -50,13 +121,40 @@ export default class Dashboard extends Component {
                             <input type='text'
                                 placeholder={classroom.nameClass}
                                 className="border-style"
-                                value={classroom.className} />
+                                value={this.state.nameClass}
+                                onChange={e => this.setState({ nameClass: e.target.value })} />
                             <input type='text'
                                 placeholder={classroom.description}
                                 className="border-style padding"
-                                value={classroom.description} />
+                                value={this.state.descriptionE}
+                                onChange={e => this.setState({ descriptionE: e.target.value })} />
                             <div className='buttonM'>
-                                <button onClick={this.escondeModal} className='modalButton'>Editar</button>
+                                <button onClick={this.editarTurma} className='modalButton'>Editar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </Modal>
+        ) : null;
+
+        const modalC = this.state.showModalC ? (
+            <Modal>
+                <div className="modal">
+                    <div className='modalBody'>
+                        <div className='modalText'>Criar Tarefa</div>
+                        <form className='formM'>
+                            <input type='text'
+                                placeholder='Digite o titúlo da tarefa'
+                                className="border-style"
+                                value={this.state.title}
+                                onChange={e => this.setState({ title: e.target.value })} />
+                            <input type='text'
+                                placeholder='Digite a descrição da tarefa'
+                                className="border-style padding"
+                                value={this.state.descriptionC}
+                                onChange={e => this.setState({ descriptionC: e.target.value })} />
+                            <div className='buttonM'>
+                                <button onClick={this.criarTarefa} className='modalButton'>Criar</button>
                             </div>
                         </form>
                     </div>
@@ -73,8 +171,8 @@ export default class Dashboard extends Component {
                     <p className='info'>{classroom.description}</p>
                     <div className='button-codigo'>
                         <p className='info-codigo'>Código da Turma: {classroom.codigo}</p>
-                        <button className='edit-button' onClick={this.mostraModal}><img src='/images/edit.svg' alt='edit-button'></img></button>
-                        {modal}
+                        <button className='edit-button' onClick={this.mostraModalE}><img src='/images/edit.svg' alt='edit-button'></img></button>
+                        {modalE}
                     </div>
                 </div>
                 <div className='container-taks-answer'>
@@ -85,10 +183,8 @@ export default class Dashboard extends Component {
                     <div className='card-answer'>
                     </div>
                 </div>
-                <div className='card-tarefas'>
-                    <p></p>
-                </div>
-                <button className="task-plus-button" onClick={this.mostraModal}><p className='plus'>+</p></button>
+                <button className="task-plus-button" onClick={this.mostraModalC}><p className='plus'>+</p></button>
+                {modalC}
                 <div className='space-task'></div>
                 <footer className='dash-foot'>
                     <div className='footer-dash'>

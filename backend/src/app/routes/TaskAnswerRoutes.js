@@ -9,7 +9,7 @@ const middleware = require('../middlewares/user')
 TaskAnswerRoute.use(middleware);
 TaskAnswerRoute.post('/createTaskAnswer', TaskAnswerController.createTaskAnswer);
 TaskAnswerRoute.get('/', TaskAnswerController.list);
-// ClassroomRoute.get('/classShow/:classId', ClassroomController.show);
+TaskAnswerRoute.post('/answerShow', TaskAnswerController.showTaskAnswer);
 // ClassroomRoute.post('/create', ClassroomController.store);
 // ClassroomRoute.put('/update/:classId', ClassroomController.update);
 

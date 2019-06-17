@@ -6,13 +6,13 @@ const User = mongoose.model('User');
 
 const inClass = async (req, res) => {
     try {
-        const classroom = await Classroom.findOneAndUpdate({codigo: req.body.codigo},
-            { $push: { students: req.userId } }, { new: true }).populate(['students','user']);
+        const classroom = await Classroom.findOneAndUpdate({ codigo: req.body.codigo },
+            { $push: { students: req.userId } }, { new: true }).populate(['students', 'user']);
 
         const user = await User.findOneAndUpdate({ _id: req.userId },
             { $push: { classroom: classroom } }, { new: true }).populate(['classroom'])
 
-        res.send({ classroom, user})
+        res.send({ classroom, user })
 
     } catch (err) {
         console.log(err)
@@ -82,7 +82,7 @@ const store = async (req, res) => {
             '$set': {
                 classroom: classroom._id,
             }
-        }, {new : true}).populate(['classroom'])
+        }, { new: true }).populate(['classroom'])
 
         return res.send({ classroom, atualizar, usuario });
 
@@ -104,10 +104,15 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-
-        const classroom = await Classroom.findByIdAndUpdate(req.body.classId, req.body, { new: true });
-
+        const classroom = await Classroom.findByIdAndUpdate({ _id: req.body.classId },
+            {
+                '$set': {
+                    nameClass: req.body.nameClass,
+                    description: req.body.description
+                }
+            }, { new: true });
         return res.send({ classroom });
+        
     } catch (err) {
         console.log(err);
         return res.status(400).send({ error: 'Error updating classroom' });

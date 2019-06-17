@@ -8,11 +8,11 @@ const create = async (req, res) => {
     try {
         const task = await Task.create({ ...req.body, user: req.userId, });
 
-        const classroom = await Classroom.findByIdAndUpdate({ _id: req.body.classroom._id }, 
-            { $push: { tasks: task }}, { new: true }).populate(['classroom', 'tasks'])
+        const classroom = await Classroom.findByIdAndUpdate({ _id: req.body.classroom._id },
+            { $push: { tasks: task } }, { new: true }).populate(['classroom', 'tasks'])
 
         return res.send({ task, classroom });
-        
+
     } catch (err) {
         console.log(err)
         return res.status(400).send({ error: 'Error creating task' });
@@ -21,9 +21,15 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        const task = await Task.findByIdAndUpdate(req.params.taskId, { ...req.body, user: req.userId, class: req.classId });
+        const task = await Task.findOneAndUpdate(req.body.taskId, {
+            '$set': {
+                title: req.body.title,
+                description: req.body.description
+            }
+        }, { new: true }).populate(['classroom']);
 
         return res.send({ task });
+
     } catch (err) {
         return res.status(400).send({ error: 'Error updating task' })
     }
@@ -31,7 +37,7 @@ const update = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const task = await Task.findById(req.params.taskId).populate(['user', 'class']);
+        const task = await Task.findById(req.body.taskId).populate(['user', 'classroom', 'answer']);
 
         return res.send({ task });
     } catch (err) {

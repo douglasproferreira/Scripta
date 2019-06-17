@@ -10,6 +10,8 @@ import './class.css'
 export default class Classroom extends Component {
     state = {
         classrooms: [],
+        name: '',
+        description: ''
     }
 
     componentDidMount() {
@@ -25,12 +27,12 @@ export default class Classroom extends Component {
             }
         })
             .then(res => res.json())
-            .then(data => { this.setTurmas(data)})
+            .then(data => { this.setTurmas(data) })
             .catch(err => { console.log(err) })
     }
 
     setTurmas = (data) => {
-        this.setState({classrooms: data.classroom})
+        this.setState({ classrooms: data.classroom })
         console.log(this.state.classrooms)
     }
 
@@ -49,6 +51,32 @@ export default class Classroom extends Component {
         this.setState({ showModal: false });
     }
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(this.state.codigo)
+        const token = await localStorage.getItem('token');
+        fetch('http://localhost:3000/classroom/create', {
+            method: 'POST',
+            body: JSON.stringify({
+                nameClass: this.state.name,
+                description: this.state.description
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(res => res.json())
+            .then(data => { this.next(data) })
+            .catch(err => { console.log(err) })
+    }
+
+    next = (data) => {
+        console.log(data);
+        alert('Turma cadastrada com sucesso!')
+        this.escondeModal();
+    }
+
     render() {
         const modal = this.state.showModal ? (
             <Modal>
@@ -56,10 +84,20 @@ export default class Classroom extends Component {
                     <div className='modalBody'>
                         <div className='modalText'>Criar Turma</div>
                         <form className='formM'>
-                            <input type='text' name='fwd' placeholder='Assunto' className="border-style" />
-                            <input type='text' name='name' placeholder='Nome da Turma' className="border-style padding" />
+                            <input type='text'
+                                name='fwd'
+                                placeholder='Descrição da Turma'
+                                className="border-style"
+                                value={this.state.description}
+                                onChange={e => this.setState({ description: e.target.value })} />
+                            <input type='text'
+                                name='name'
+                                placeholder='Nome da Turma'
+                                className="border-style padding"
+                                value={this.state.name}
+                                onChange={e => this.setState({ name: e.target.value })} />
                             <div className='buttonM'>
-                                <button onClick={this.escondeModal} className='modalButton'>Criar</button>
+                                <button onClick={this.handleSubmit} className='modalButton'>Criar</button>
                             </div>
                         </form>
                     </div>

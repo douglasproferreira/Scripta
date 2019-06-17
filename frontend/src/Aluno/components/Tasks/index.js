@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './tasks.css'
 
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Modal from '../../../components/Modal/'
 
@@ -48,7 +48,12 @@ export default class Task extends Component {
                         </div>
                         <hr className='hr-modal'></hr>
                         <div className='button-p'>
-                            <button onClick={this.escondeModal} className='modal-button-p'>Produzir</button>
+                            <Link to={{
+                                pathname: '/production',
+                                state: this.props
+                            }}>
+                                <button onClick={this.escondeModal} className='modal-button-p'>Produzir</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

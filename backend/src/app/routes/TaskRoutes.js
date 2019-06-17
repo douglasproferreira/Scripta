@@ -8,7 +8,8 @@ const middleware = require('../middlewares/user')
 
 TaskRoute.use(middleware);
 TaskRoute.post('/createTask', TaskController.create);
-// ClassroomRoute.get('/classShow/:classId', ClassroomController.show);
+TaskRoute.get('/taskShow', TaskController.show);
+TaskRoute.put('/editTask', TaskController.update)
 // ClassroomRoute.post('/create', ClassroomController.store);
 // ClassroomRoute.put('/update/:classId', ClassroomController.update);
 

@@ -14,27 +14,25 @@ const TaskAnswerSchema = new mongoose.Schema({
         required: true
     },
 
-    
-        introducao: {
-            type: String,
-        },
+    introducao: {
+        type: String,
+    },
 
-        desenvolvimento: {
-            type: String,
-        },
+    desenvolvimento: {
+        type: String,
+    },
 
-        resultados: {
-            type: String,
-        },
+    resultados: {
+        type: String,
+    },
 
-        recomendacoes: {
-            type: String,
-        },
+    recomendacoes: {
+        type: String,
+    },
 
-        referencias: {
-            type: String,
-        },
-    
+    referencias: {
+        type: String,
+    },
 
     feedback: {
         type: mongoose.Schema.Types.ObjectId,
