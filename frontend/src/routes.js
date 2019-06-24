@@ -10,6 +10,8 @@ import Register from './pages/Register/';
 import Dashboard from './Professor/pages/Dashboard/';
 import DashboardAluno from './Aluno/pages/Dashboard/';
 import Production from './Aluno/pages/Production/';
+import ProductionView from './Aluno/pages/ProductionView/';
+import Feedback from './Aluno/pages/Feedback/';
 import Entregas from './Professor/pages/Entregas/';
 
 
@@ -28,6 +30,8 @@ class Routes extends Component {
         <Route path='/dashboard' component={Dashboard}/>
         <Route path='/dashboardAluno' component={DashboardAluno}/>
         <Route path='/production' component={Production}/>
+        <Route path='/productionView' component={ProductionView}/>
+        <Route path='/feedback' component={Feedback}/>
         <Route path='/entregas' component={Entregas}/>
       </Switch>
       </BrowserRouter>

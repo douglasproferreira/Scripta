@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../../../components/Header'
 
-import Redirect from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 import './production.css'
 
@@ -41,9 +41,14 @@ export default class Production extends Component {
     next = (data) => {
         console.log(data)
         alert('Enviado com sucesso')
+        this.setState({from: true})
     }
 
     render() {
+        if(this.state.from)
+        return <Redirect to={{
+            pathname: '/classAluno'
+        }}/>
         return (
             <div className='home'>
                 <Header />
@@ -52,6 +57,7 @@ export default class Production extends Component {
                         <h1 className='production-title'>Área de Produção</h1>
                         <h2 className='production-title-sec'>Realize aqui sua produção, conforme solicita seu professor!</h2>
                     </div>
+                    <div className='right'>
                     <h3 className='production-introduction'>Introdução</h3>
                     <div className='introduction'>
                         <blockquote className='blockquote'>
@@ -118,6 +124,7 @@ export default class Production extends Component {
 
                     <div className='button-production'>
                         <button onClick={this.enviar} className='button-production-c'>Enviar</button>
+                    </div>
                     </div>
                 </div>
                 <footer className='dash-foot'>

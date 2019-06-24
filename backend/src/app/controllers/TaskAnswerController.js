@@ -37,8 +37,20 @@ const showTaskAnswer = async (req, res) => {
     }
 }
 
+const busca = async (req, res) => {
+    try {
+        const answer = await TaskAnswer.findOne({ task : req.body.task }).populate(['user'])
+
+        res.send(answer)
+    } catch (err) {
+        console.log(err)
+        return res.status(400).send({ error: "Error loading answer" });
+    }
+}
+
 module.exports = {
     createTaskAnswer,
     list, 
-    showTaskAnswer
+    showTaskAnswer,
+    busca
 }

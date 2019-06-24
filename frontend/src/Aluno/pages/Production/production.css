@@ -21,6 +21,11 @@
     background: white;
 }
 
+.right{
+    padding-right: 150px;
+    padding-left: 150px;
+}
+
 .production-title {
     font-size: 22px;
 }

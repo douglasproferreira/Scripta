@@ -51,7 +51,7 @@ export default class Classroom extends Component {
     }
 
     handleInputChange = (e) => {
-        this.setState({codigo: e.target.value})
+        this.setState({ codigo: e.target.value })
     }
 
     setTurmas = (data) => {
@@ -80,6 +80,10 @@ export default class Classroom extends Component {
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
+                        <div className='span-modal'>
+                            <button className='span-modal-text'
+                                onClick={this.escondeModal}>X</button>
+                        </div>
                         <div className='modalText'>Participar da Turma</div>
                         <form className='formM' action='submit'>
                             <input type='text'

@@ -1,7 +1,6 @@
 const mongoose = require('../../database')
 
 const TaskAnswerSchema = new mongoose.Schema({
-
     task: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task',

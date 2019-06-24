@@ -59,6 +59,10 @@ export default class Task extends Component {
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
+                        <div className='span-modal'>
+                            <button className='span-modal-text'
+                                onClick={this.escondeModal}>X</button>
+                        </div>
                         <div className='modalText'>Editar Tarefa</div>
                         <form className='formM'>
                             <input type='text'

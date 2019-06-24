@@ -12,7 +12,8 @@ export default class Register extends Component {
         nome: '',
         email: '',
         password: '',
-        from: false
+        from: false,
+        path: ''
     }
 
     handleSubmit = async (e) => {
@@ -36,8 +37,14 @@ export default class Register extends Component {
 
             console.log(response);
 
+            if(this.state.typeUser === 'Professor'){
+                this.setState({path: '/home'})
+            } else if(this.state.typeUser === 'Aluno'){
+                this.setState({path: '/homeAluno'})
+            }
+
             alert("Cadastro Realizado com Sucesso");
-            // this.setState({ from: true });
+            this.setState({ from: true });
 
         } catch (err) {
             alert("Erro no Cadastro");
@@ -47,7 +54,7 @@ export default class Register extends Component {
     
     render() {
         if (this.state.from) {
-            return <Redirect to='/home' />
+            return <Redirect to={this.state.path} />
         }
         return (
             <div className='FormRegister'>

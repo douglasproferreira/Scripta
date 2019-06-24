@@ -28,11 +28,15 @@ export default class Home extends Component {
       <Modal>
         <div className="modal">
           <div className='modalBody'>
+            <div className='span-modal'>
+            <button className='span-modal-text'
+            onClick={this.escondeModal}>X</button>
+            </div>
             <div className='modalText'>Participar da Turma</div>
             <form className='formM'>
               <input type='text' name='codigo' placeholder='Código da Turma' className="border-style" />
               <div className='buttonM'>
-                <button onClick={this.escondeModal} className='modalButton'>Entrar</button>
+                <button onClick={this.escondeModal}className='modalButton'>Participar</button>
               </div>
             </form>
           </div>

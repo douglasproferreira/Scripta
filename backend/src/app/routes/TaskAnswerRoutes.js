@@ -10,7 +10,7 @@ TaskAnswerRoute.use(middleware);
 TaskAnswerRoute.post('/createTaskAnswer', TaskAnswerController.createTaskAnswer);
 TaskAnswerRoute.get('/', TaskAnswerController.list);
 TaskAnswerRoute.post('/answerShow', TaskAnswerController.showTaskAnswer);
-// ClassroomRoute.post('/create', ClassroomController.store);
+TaskAnswerRoute.post('/busca', TaskAnswerController.busca);
 // ClassroomRoute.put('/update/:classId', ClassroomController.update);
 
 module.exports = TaskAnswerRoute;

@@ -20,15 +20,19 @@ export default class Header extends Component {
         )
     }
 
+    verificar = () => {
+        console.log('Aqui')
+    }
+
     render() {
         return (
             <header >
                 <div className='header'>
                     <h1 className='title'>Scripta</h1>
                     <div className='column'>
-                        <div className="menu"></div>
-                        <div className="menu"></div>
-                        <div className="menu"></div>
+                        <button className="menu" onClick={this.verificar}></button>
+                        <button className="menu" onClick={this.verificar}></button>
+                        <button className="menu" onClick={this.verificar}></button>
                     </div>
                 </div>
             </header>

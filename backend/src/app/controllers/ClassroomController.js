@@ -79,7 +79,7 @@ const store = async (req, res) => {
         }, { new: true }).populate(['classroom'])
 
         const usuario = await User.findByIdAndUpdate({ _id: req.userId }, {
-            '$set': {
+            push: {
                 classroom: classroom._id,
             }
         }, { new: true }).populate(['classroom'])

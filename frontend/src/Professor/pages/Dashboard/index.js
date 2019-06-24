@@ -116,6 +116,10 @@ export default class Dashboard extends Component {
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
+                        <div className='span-modal'>
+                            <button className='span-modal-text'
+                                onClick={this.escondeModalE}>X</button>
+                        </div>
                         <div className='modalText'>Editar Turma</div>
                         <form className='formM'>
                             <input type='text'
@@ -141,6 +145,10 @@ export default class Dashboard extends Component {
             <Modal>
                 <div className="modal">
                     <div className='modalBody'>
+                    <div className='span-modal'>
+                            <button className='span-modal-text'
+                                onClick={this.escondeModalC}>X</button>
+                        </div>
                         <div className='modalText'>Criar Tarefa</div>
                         <form className='formM'>
                             <input type='text'

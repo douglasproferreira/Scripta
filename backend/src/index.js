@@ -15,6 +15,7 @@ app.use("/user", require("./app/routes/UserRoute"));
 app.use("/classroom", require("./app/routes/ClassroomRoutes"));
 app.use("/task", require("./app/routes/TaskRoutes"));
 app.use("/taskAnswer", require("./app/routes/TaskAnswerRoutes"));
+app.use("/feedback", require("./app/routes/FeedbackRoutes"))
 
 
 app.listen(3000, () => {

@@ -56,14 +56,23 @@
     height: 55px;
 }
 
-.modalTaskBody{
+.modalTaskBody {
     background: white;
     width: 430px;
-    height: 500px;
+    height: 550px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     padding: 20px;
+}
+
+.span-modal-task {
+    position: relative;
+    padding: 0;
+    margin-top: 0;
+    margin-left: 90%;
+    width: 30px;
+    height: 30px;
 }
 
 .modal-title {
@@ -77,7 +86,7 @@
 .modal-description {
     font-size: 14px;
     color: black;
-    text-align: right;
+    text-align: center;
     margin-top: 10px;
     margin-bottom: 15px;
 }
@@ -112,7 +121,7 @@
     margin-top: 20px;
 }
 
-.modal-button-p{
+.modal-button-p {
     background: #40E0D0;
     color: #fafafa;
     font-weight: bold;
